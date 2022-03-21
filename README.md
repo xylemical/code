@@ -35,7 +35,9 @@ The model definition is equivalent to:
 <?php
 namespace Xylemical\Code;
 
-class Representation {
+use Xylemical\Code\RepresentationInterface;
+
+class Representation implements RepresentationInterface {
 
   public $rep;
 
@@ -45,6 +47,12 @@ class Representation {
 
 }
 ```
+
+Due to naming clashes, the class names are as follows:
+
+* Structure represents a class,
+* Contract represents an interface,
+* Mixin represents a trait.
 
 ## License
 
