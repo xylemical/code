@@ -8,20 +8,22 @@ namespace Xylemical\Code;
 class Expression implements ExpressionInterface {
 
   /**
-   * The expression contents.
+   * The expression code representation.
    *
-   * @var string
+   * @var \Xylemical\Code\Code
    */
-  protected string $contents;
+  protected Code $code;
 
   /**
    * Expression constructor.
    *
    * @param string $contents
    *   The expression contents.
+   * @param string $language
+   *   The expression language.
    */
-  public function __construct(string $contents = '') {
-    $this->contents = $contents;
+  public function __construct(string $contents = '', string $language = 'php') {
+    $this->code = new Code($language, $contents);
   }
 
   /**
@@ -41,14 +43,14 @@ class Expression implements ExpressionInterface {
    * {@inheritdoc}
    */
   public function isEmpty(): bool {
-    return $this->contents === '';
+    return $this->code->getContents() === '';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getContents(): string {
-    return $this->contents;
+  public function getCode(): Code {
+    return $this->code;
   }
 
 }

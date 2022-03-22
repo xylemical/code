@@ -16,11 +16,11 @@ interface ExpressionInterface {
   public function isEmpty(): bool;
 
   /**
-   * Get the contents of the expression.
+   * Get the code representation of the expression.
    *
-   * @return string
+   * @return \Xylemical\Code\Code
    *   The contents.
    */
-  public function getContents(): string;
+  public function getCode(): Code;
 
 }
