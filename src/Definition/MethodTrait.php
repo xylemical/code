@@ -74,6 +74,16 @@ trait MethodTrait {
   }
 
   /**
+   * Get all the methods.
+   *
+   * @return \Xylemical\Code\Definition\Method[]
+   *   The methods.
+   */
+  public function getMethods(): array {
+    return array_values($this->methods);
+  }
+
+  /**
    * Remove a method from the definition.
    *
    * @param string $method

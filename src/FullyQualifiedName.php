@@ -42,7 +42,7 @@ class FullyQualifiedName {
   /**
    * Get the namespace part of the name.
    *
-   * @return array
+   * @return string[]
    *   The namespace parts.
    */
   public function getNamespace(): array {

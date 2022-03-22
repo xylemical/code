@@ -74,6 +74,16 @@ trait ConstantTrait {
   }
 
   /**
+   * Get all the constants.
+   *
+   * @return \Xylemical\Code\Definition\Constant[]
+   *   The constants.
+   */
+  public function getConstants(): array {
+    return array_values($this->constants);
+  }
+
+  /**
    * Remove a constant from the definition.
    *
    * @param string $constant

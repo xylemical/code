@@ -74,6 +74,16 @@ trait PropertyTrait {
   }
 
   /**
+   * Get all the properties.
+   *
+   * @return \Xylemical\Code\Definition\Property[]
+   *   The properties.
+   */
+  public function getProperties(): array {
+    return array_values($this->properties);
+  }
+
+  /**
    * Remove a property from the definition.
    *
    * @param string $property

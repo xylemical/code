@@ -74,6 +74,16 @@ trait MixinTrait {
   }
 
   /**
+   * Get all the mixins.
+   *
+   * @return \Xylemical\Code\Definition\Mixin[]
+   *   The mixins.
+   */
+  public function getMixins(): array {
+    return array_values($this->mixins);
+  }
+
+  /**
    * Remove a mixin from the definition.
    *
    * @param string $mixin

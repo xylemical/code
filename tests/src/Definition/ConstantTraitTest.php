@@ -27,6 +27,7 @@ class ConstantTraitTest extends TestCase {
     $this->assertEquals($c, $obj->getConstant('Test'));
     $this->assertEquals($c, $obj->getConstant('test'));
     $this->assertEquals($a, $obj->getConstant('Test\\Trait'));
+    $this->assertEquals([$a, $b, $c], $obj->getConstants());
 
     $obj->removeConstant('Test\\Sequence');
     $this->assertNull($obj->getConstant('Test\\Sequence'));

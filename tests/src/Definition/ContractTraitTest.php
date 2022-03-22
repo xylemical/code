@@ -25,6 +25,7 @@ class ContractTraitTest extends TestCase {
     $this->assertEquals($c, $obj->getContract('Test'));
     $this->assertEquals($c, $obj->getContract('test'));
     $this->assertEquals($a, $obj->getContract('Test\\Trait'));
+    $this->assertEquals([$a, $b, $c], $obj->getContracts());
 
     $obj->removeContract('Test\\Sequence');
     $this->assertNull($obj->getContract('Test\\Sequence'));

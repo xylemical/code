@@ -74,6 +74,16 @@ trait ContractTrait {
   }
 
   /**
+   * Get all the contracts.
+   *
+   * @return \Xylemical\Code\Definition\Contract[]
+   *   The contracts.
+   */
+  public function getContracts(): array {
+    return array_values($this->contracts);
+  }
+
+  /**
    * Remove a contract from the definition.
    *
    * @param string $contract

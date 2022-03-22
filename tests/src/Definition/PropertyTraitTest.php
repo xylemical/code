@@ -25,6 +25,7 @@ class PropertyTraitTest extends TestCase {
     $this->assertEquals($c, $obj->getProperty('Test'));
     $this->assertEquals($c, $obj->getProperty('test'));
     $this->assertEquals($a, $obj->getProperty('Test\\Trait'));
+    $this->assertEquals([$a, $b, $c], $obj->getProperties());
 
     $obj->removeProperty('Test\\Sequence');
     $this->assertNull($obj->getProperty('Test\\Sequence'));

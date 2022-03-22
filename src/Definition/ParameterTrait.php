@@ -74,6 +74,16 @@ trait ParameterTrait {
   }
 
   /**
+   * Get all the parameters.
+   *
+   * @return \Xylemical\Code\Definition\Parameter[]
+   *   The parameters.
+   */
+  public function getParameters(): array {
+    return array_values($this->parameters);
+  }
+
+  /**
    * Remove a parameter from the definition.
    *
    * @param string $parameter

@@ -25,6 +25,7 @@ class ParameterTraitTest extends TestCase {
     $this->assertEquals($c, $obj->getParameter('Test'));
     $this->assertEquals($c, $obj->getParameter('test'));
     $this->assertEquals($a, $obj->getParameter('Test\\Trait'));
+    $this->assertEquals([$a, $b, $c], $obj->getParameters());
 
     $obj->removeParameter('Test\\Sequence');
     $this->assertNull($obj->getParameter('Test\\Sequence'));

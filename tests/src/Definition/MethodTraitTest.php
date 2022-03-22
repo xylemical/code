@@ -25,6 +25,7 @@ class MethodTraitTest extends TestCase {
     $this->assertEquals($c, $obj->getMethod('Test'));
     $this->assertEquals($c, $obj->getMethod('test'));
     $this->assertEquals($a, $obj->getMethod('Test\\Trait'));
+    $this->assertEquals([$a, $b, $c], $obj->getMethods());
 
     $obj->removeMethod('Test\\Sequence');
     $this->assertNull($obj->getMethod('Test\\Sequence'));

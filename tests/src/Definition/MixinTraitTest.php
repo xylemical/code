@@ -25,6 +25,7 @@ class MixinTraitTest extends TestCase {
     $this->assertEquals($c, $obj->getMixin('Test'));
     $this->assertEquals($c, $obj->getMixin('test'));
     $this->assertEquals($a, $obj->getMixin('Test\\Trait'));
+    $this->assertEquals([$a, $b, $c], $obj->getMixins());
 
     $obj->removeMixin('Test\\Sequence');
     $this->assertNull($obj->getMixin('Test\\Sequence'));
