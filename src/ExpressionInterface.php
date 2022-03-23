@@ -5,7 +5,7 @@ namespace Xylemical\Code;
 /**
  * Provide for executable expressions.
  */
-interface ExpressionInterface {
+interface ExpressionInterface extends DefinitionInterface {
 
   /**
    * Check the expression is empty.

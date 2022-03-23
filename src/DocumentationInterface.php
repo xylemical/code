@@ -5,7 +5,7 @@ namespace Xylemical\Code;
 /**
  * Provides flexible documentation for definitions.
  */
-interface DocumentationInterface {
+interface DocumentationInterface extends DefinitionInterface {
 
   /**
    * Get the contents of the documentation.
