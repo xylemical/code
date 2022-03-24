@@ -13,6 +13,8 @@ return (new Method('method'))
   ->setType($type)
   ->setDocumentation(new Documentation('Test'))
   ->setValue(new Expression('tank'))
+  ->setAbstract(TRUE)
+  ->setStatic(TRUE)
   ->addParameters([
     (new Parameter('abc'))
       ->setDocumentation(new Documentation('testing'))

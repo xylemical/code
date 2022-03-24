@@ -38,6 +38,22 @@ trait MixinTrait {
    */
   public function addMixins(array $mixins): static {
     foreach ($mixins as $mixin) {
+      $this->addMixin($mixin);
+    }
+    return $this;
+  }
+
+  /**
+   * Add a mixin to the definition.
+   *
+   * @param \Xylemical\Code\Definition\Mixin $mixin
+   *   The mixin.
+   *
+   * @return $this
+   */
+  public function addMixin(Mixin $mixin): static {
+    $name = strtolower($mixin->getName());
+    if (!isset($this->mixins[$name])) {
       $this->setMixin($mixin);
     }
     return $this;

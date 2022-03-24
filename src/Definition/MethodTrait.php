@@ -38,6 +38,22 @@ trait MethodTrait {
    */
   public function addMethods(array $methods): static {
     foreach ($methods as $method) {
+      $this->addMethod($method);
+    }
+    return $this;
+  }
+
+  /**
+   * Add a method to the definition.
+   *
+   * @param \Xylemical\Code\Definition\Method $method
+   *   The method.
+   *
+   * @return $this
+   */
+  public function addMethod(Method $method): static {
+    $name = strtolower($method->getName());
+    if (!isset($this->methods[$name])) {
       $this->setMethod($method);
     }
     return $this;

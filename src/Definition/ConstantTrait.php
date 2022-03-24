@@ -38,6 +38,22 @@ trait ConstantTrait {
    */
   public function addConstants(array $constants): static {
     foreach ($constants as $constant) {
+      $this->addConstant($constant);
+    }
+    return $this;
+  }
+
+  /**
+   * Add a constant to the definition.
+   *
+   * @param \Xylemical\Code\Definition\Constant $constant
+   *   The constant.
+   *
+   * @return $this
+   */
+  public function addConstant(Constant $constant): static {
+    $name = strtolower($constant->getName());
+    if (!isset($this->constants[$name])) {
       $this->setConstant($constant);
     }
     return $this;

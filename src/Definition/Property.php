@@ -17,6 +17,7 @@ class Property implements DefinitionInterface {
 
   use DocumentationTrait;
   use NameTrait;
+  use StaticTrait;
   use TypeTrait;
   use ValueTrait;
   use VisibilityTrait;

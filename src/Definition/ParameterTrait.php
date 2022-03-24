@@ -38,6 +38,22 @@ trait ParameterTrait {
    */
   public function addParameters(array $parameters): static {
     foreach ($parameters as $parameter) {
+      $this->addParameter($parameter);
+    }
+    return $this;
+  }
+
+  /**
+   * Add a parameter to the definition.
+   *
+   * @param \Xylemical\Code\Definition\Parameter $parameter
+   *   The parameter.
+   *
+   * @return $this
+   */
+  public function addParameter(Parameter $parameter): static {
+    $name = strtolower($parameter->getName());
+    if (!isset($this->parameters[$name])) {
       $this->setParameter($parameter);
     }
     return $this;

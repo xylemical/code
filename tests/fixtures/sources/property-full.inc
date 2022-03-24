@@ -10,4 +10,5 @@ return (new Property('property'))
   ->setVisibility(Visibility::PROTECTED)
   ->setType((new FullyQualifiedName('Test\\Code'))->setShorthand('Shorthand'))
   ->setDocumentation(new Documentation('Test'))
+  ->setStatic(TRUE)
   ->setValue(new Expression('tank'));

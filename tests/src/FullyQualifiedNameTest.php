@@ -34,6 +34,7 @@ class FullyQualifiedNameTest extends TestCase {
     $this->assertEquals($shortname, $obj->getShorthand());
     $this->assertEquals($namespaces, $obj->getNamespace());
     $this->assertEquals(explode($separator, $fullname), $obj->getFullName());
+    $this->assertFalse($obj->hasShorthand());
     $this->assertTrue($obj->equals(new FullyQualifiedName($fullname)));
     $this->assertFalse($obj->equals(new FullyQualifiedName('different')));
     $this->assertFalse($obj->equals(new FullyQualifiedName("different{$separator}namespace")));
@@ -41,8 +42,14 @@ class FullyQualifiedNameTest extends TestCase {
     $obj->setShorthand('alias');
     $this->assertEquals($shortname, $obj->getName());
     $this->assertEquals('alias', $obj->getShorthand());
+    $this->assertTrue($obj->hasShorthand());
     $this->assertTrue($obj->equals(new FullyQualifiedName($fullname)));
     $this->assertFalse($obj->equals(new FullyQualifiedName('alias')));
+  }
+
+  public function testCreation() {
+    $obj = FullyQualifiedName::create('unknown');
+    $this->assertEquals($obj, FullyQualifiedName::create('unknown'));
   }
 
 }

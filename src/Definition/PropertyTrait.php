@@ -38,6 +38,22 @@ trait PropertyTrait {
    */
   public function addProperties(array $properties): static {
     foreach ($properties as $property) {
+      $this->addProperty($property);
+    }
+    return $this;
+  }
+
+  /**
+   * Add a property to the definition.
+   *
+   * @param \Xylemical\Code\Definition\Property $property
+   *   The property.
+   *
+   * @return $this
+   */
+  public function addProperty(Property $property): static {
+    $name = strtolower($property->getName());
+    if (!isset($this->properties[$name])) {
       $this->setProperty($property);
     }
     return $this;

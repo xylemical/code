@@ -19,6 +19,7 @@ class Method implements DefinitionInterface {
   use DocumentationTrait;
   use NameTrait;
   use ParameterTrait;
+  use StaticTrait;
   use TypeTrait;
   use ValueTrait;
   use VisibilityTrait;

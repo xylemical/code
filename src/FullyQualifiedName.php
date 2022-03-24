@@ -84,6 +84,16 @@ class FullyQualifiedName {
   }
 
   /**
+   * Check the name has a shorthand version.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasShorthand(): bool {
+    return $this->getShorthand() !== $this->getName();
+  }
+
+  /**
    * Get the shorthand name used for the name.
    *
    * @return string
@@ -134,6 +144,18 @@ class FullyQualifiedName {
    */
   public static function getSeparator(): string {
     return self::$separator;
+  }
+
+  /**
+   * Create a FullyQualifiedName.
+   *
+   * @param string $name
+   *   The name.
+   *
+   * @return $this
+   */
+  public static function create(string $name): static {
+    return ObjectManager::get(FullyQualifiedName::class, strtolower($name), new FullyQualifiedName($name));
   }
 
 }

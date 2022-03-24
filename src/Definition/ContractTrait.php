@@ -38,6 +38,22 @@ trait ContractTrait {
    */
   public function addContracts(array $contracts): static {
     foreach ($contracts as $contract) {
+      $this->addContract($contract);
+    }
+    return $this;
+  }
+
+  /**
+   * Add a contract to the definition.
+   *
+   * @param \Xylemical\Code\Definition\Contract $contract
+   *   The contract.
+   *
+   * @return $this
+   */
+  public function addContract(Contract $contract): static {
+    $name = strtolower($contract->getName());
+    if (!isset($this->contracts[$name])) {
       $this->setContract($contract);
     }
     return $this;
