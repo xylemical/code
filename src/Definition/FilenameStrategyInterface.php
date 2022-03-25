@@ -10,14 +10,14 @@ use Xylemical\Code\FullyQualifiedName;
 interface FilenameStrategyInterface {
 
   /**
-   * Get the filename for a fully qualified name.
+   * Get the filenames containing the structure for a fully qualified name.
    *
    * @param \Xylemical\Code\FullyQualifiedName $name
    *   The fully qualified name.
    *
-   * @return string
+   * @return string[]
    *   The filename.
    */
-  public function getFilename(FullyQualifiedName $name): string;
+  public function getFilenames(FullyQualifiedName $name): array;
 
 }

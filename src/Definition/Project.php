@@ -113,7 +113,7 @@ class Project {
    *   The result.
    */
   public function hasStructure(string $name): bool {
-    if ($this->getFileByName($name)) {
+    if ($this->getFilesByName($name)) {
       return TRUE;
     }
     return FALSE;
@@ -122,15 +122,19 @@ class Project {
   /**
    * Get the structures of the project.
    *
-   * @return \Generator
-   *   The generator.
+   * @return array
+   *   The structures.
    */
-  public function getStructures(): \Generator {
+  public function getStructures(): array {
+    $structures = [];
     foreach ($this->files as $file) {
       foreach ($file->getStructures() as $structure) {
-        yield $structure;
+        if (!in_array($structure, $structures)) {
+          $structures[] = $structure;
+        }
       }
     }
+    return $structures;
   }
 
   /**
@@ -143,7 +147,8 @@ class Project {
    *   The structure.
    */
   public function getStructure(string $name): ?StructureInterface {
-    if ($file = $this->getFileByName($name)) {
+    if ($files = $this->getFilesByName($name)) {
+      $file = current($files);
       return $file->getStructure($name);
     }
     return NULL;
@@ -158,17 +163,24 @@ class Project {
    * @return $this
    */
   public function addStructure(StructureInterface $structure): static {
-    $filename = $this->getStrategy()
-      ->getFilename($structure->getFullyQualifiedName());
+    $filenames = $this->getStrategy()
+      ->getFilenames($structure->getFullyQualifiedName());
 
-    if ($file = $this->getFile($filename)) {
-      $file->addStructure($structure);
-      return $this;
+    $primary = TRUE;
+    foreach ($filenames as $filename) {
+      if ($file = $this->getFile($filename)) {
+        $file->addStructure($structure);
+        continue;
+      }
+
+      $file = File::create($filename);
+      $file->addStructure($structure)
+        ->setPrimary($primary);
+      $this->addFile($file);
+
+      $primary = FALSE;
     }
 
-    $file = File::create($filename);
-    $file->addStructure($structure);
-    $this->addFile($file);
     return $this;
   }
 
@@ -181,29 +193,31 @@ class Project {
    * @return $this
    */
   public function removeStructure(StructureInterface $structure): static {
-    $filename = $this->getStrategy()
-      ->getFilename($structure->getFullyQualifiedName());
+    $filenames = $this->getStrategy()
+      ->getFilenames($structure->getFullyQualifiedName());
 
-    if ($file = $this->getFile($filename)) {
-      $file->removeStructure($structure->getName());
+    foreach ($filenames as $filename) {
+      if ($file = $this->getFile($filename)) {
+        $file->removeStructure($structure->getName());
+      }
     }
     return $this;
   }
 
   /**
-   * Get file for a structure name.
+   * Get files for a structure name.
    *
    * @param string $name
    *   The name.
    *
-   * @return \Xylemical\Code\Definition\File|null
-   *   The file.
+   * @return \Xylemical\Code\Definition\File[]
+   *   The files.
    */
-  public function getFileByName(string $name): ?File {
-    $filename = $this->getStrategy()
-      ->getFilename(FullyQualifiedName::create($name));
+  public function getFilesByName(string $name): array {
+    $filenames = $this->getStrategy()
+      ->getFilenames(FullyQualifiedName::create($name));
 
-    return $this->getFile($filename);
+    return array_filter(array_map([$this, 'getFile'], $filenames));
   }
 
   /**

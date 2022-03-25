@@ -39,15 +39,15 @@ class ProjectTest extends TestCase {
   public function testStructure() {
     $strategy = $this->prophesize(FilenameStrategyInterface::class);
     $strategy
-      ->getFilename(FullyQualifiedName::create('test'))
-      ->willReturn('src/Test.php');
+      ->getFilenames(FullyQualifiedName::create('test'))
+      ->willReturn(['src/Test.php']);
     $strategy
-      ->getFilename(FullyQualifiedName::create('dummy'))
-      ->willReturn('src/Test.php');
+      ->getFilenames(FullyQualifiedName::create('dummy'))
+      ->willReturn(['src/Test.php', 'src/Dummy.php']);
 
     $project = new Project('test', $strategy->reveal());
 
-    $this->assertEquals([], iterator_to_array($project->getStructures()));
+    $this->assertEquals([], $project->getStructures());
     $this->assertNull($project->getStructure('test'));
     $this->assertFalse($project->hasStructure('test'));
     $this->assertNull($project->getFile('src/Test.php'));
@@ -57,20 +57,27 @@ class ProjectTest extends TestCase {
     $this->assertTrue($project->hasStructure('test'));
     $this->assertEquals($structure, $project->getStructure('test'));
     $this->assertNotNull($project->getFile('src/Test.php'));
-    $this->assertEquals($project->getFile('src/Test.php'), $project->getFileByName('test'));
-    $this->assertEquals([$structure], iterator_to_array($project->getStructures()));
+    $this->assertEquals([$project->getFile('src/Test.php')], $project->getFilesByName('test'));
+    $this->assertEquals([$structure], $project->getStructures());
 
     $dummy = new Structure('dummy');
     $project->addStructure($dummy);
     $this->assertEquals([
       $structure,
       $dummy,
-    ], iterator_to_array($project->getStructures()));
+    ], $project->getStructures());
+
+    $this->assertNotNull($project->getFile('src/Dummy.php'));
+    $this->assertEquals([
+      $project->getFile('src/Test.php'),
+      $project->getFile('src/Dummy.php'),
+    ], $project->getFilesByName('dummy'));
+
 
     $project->removeStructure($dummy);
     $this->assertEquals([
       $structure,
-    ], iterator_to_array($project->getStructures()));
+    ], $project->getStructures());
   }
 
 }

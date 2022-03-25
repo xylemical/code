@@ -21,6 +21,13 @@ class File implements DefinitionInterface {
   protected string $filename;
 
   /**
+   * This is a primary file for the structures.
+   *
+   * @var bool
+   */
+  protected bool $primary = TRUE;
+
+  /**
    * File constructor.
    *
    * @param string $filename
@@ -50,6 +57,29 @@ class File implements DefinitionInterface {
    */
   public function setFilename(string $filename): static {
     $this->filename = $filename;
+    return $this;
+  }
+
+  /**
+   * Get the primary file for structures flag.
+   *
+   * @return bool
+   *   The primary.
+   */
+  public function getPrimary(): bool {
+    return $this->primary;
+  }
+
+  /**
+   * Set the primary file for structures..
+   *
+   * @param bool $flag
+   *   The primary.
+   *
+   * @return $this
+   */
+  public function setPrimary(bool $flag): static {
+    $this->primary = $flag;
     return $this;
   }
 
