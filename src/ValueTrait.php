@@ -40,4 +40,14 @@ trait ValueTrait {
     return $this;
   }
 
+  /**
+   * Check there is a value.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasValue(): bool {
+    return !$this->getValue()->isEmpty();
+  }
+
 }
