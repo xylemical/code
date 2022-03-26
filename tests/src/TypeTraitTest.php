@@ -11,6 +11,7 @@ class TypeTraitTest extends TestCase {
 
     $this->assertEquals(FullyQualifiedName::class, get_class($obj->getType()));
     $this->assertEquals('', (string) $obj->getType());
+    $this->assertFalse($obj->hasType());
 
     $name = '\\Test\\Object';
     $name = new FullyQualifiedName($name);
@@ -18,6 +19,7 @@ class TypeTraitTest extends TestCase {
     $obj->setType($name);
     $this->assertEquals((string) $name, (string) $obj->getType());
     $this->assertEquals($name, $obj->getType());
+    $this->assertTrue($obj->hasType());
   }
 
 }

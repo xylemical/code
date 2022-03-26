@@ -40,4 +40,14 @@ trait TypeTrait {
     return $this;
   }
 
+  /**
+   * Check there is a type.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasType(): bool {
+    return $this->getType()->getName() !== '';
+  }
+
 }
