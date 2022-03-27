@@ -114,7 +114,6 @@ trait MixinTrait {
   }
 
   /**
-   *
    * Check there are mixins defined.
    *
    * @return bool

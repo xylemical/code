@@ -114,7 +114,6 @@ trait ConstantTrait {
   }
 
   /**
-   *
    * Check there are constants defined.
    *
    * @return bool

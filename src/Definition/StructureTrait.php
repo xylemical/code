@@ -114,7 +114,6 @@ trait StructureTrait {
   }
 
   /**
-   *
    * Check there are structures defined.
    *
    * @return bool

@@ -114,7 +114,6 @@ trait ImportTrait {
   }
 
   /**
-   *
    * Check there are imports defined.
    *
    * @return bool

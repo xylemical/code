@@ -114,7 +114,6 @@ trait PropertyTrait {
   }
 
   /**
-   *
    * Check there are properties defined.
    *
    * @return bool

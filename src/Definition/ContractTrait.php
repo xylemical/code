@@ -114,7 +114,6 @@ trait ContractTrait {
   }
 
   /**
-   *
    * Check there are contracts defined.
    *
    * @return bool

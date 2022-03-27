@@ -114,7 +114,6 @@ trait ProjectTrait {
   }
 
   /**
-   *
    * Check there are projects defined.
    *
    * @return bool

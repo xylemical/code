@@ -114,7 +114,6 @@ trait ParameterTrait {
   }
 
   /**
-   *
    * Check there are parameters defined.
    *
    * @return bool

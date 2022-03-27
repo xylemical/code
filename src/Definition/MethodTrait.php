@@ -114,7 +114,6 @@ trait MethodTrait {
   }
 
   /**
-   *
    * Check there are methods defined.
    *
    * @return bool

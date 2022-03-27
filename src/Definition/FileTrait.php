@@ -114,7 +114,6 @@ trait FileTrait {
   }
 
   /**
-   *
    * Check there are files defined.
    *
    * @return bool
