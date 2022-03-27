@@ -113,4 +113,15 @@ trait ParameterTrait {
     return $this;
   }
 
+  /**
+   *
+   * Check there are parameters defined.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasParameters(): bool {
+    return count($this->parameters) > 0;
+  }
+
 }

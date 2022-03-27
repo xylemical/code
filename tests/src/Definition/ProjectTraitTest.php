@@ -13,6 +13,7 @@ class ProjectTraitTest extends TestCase {
     $obj = $this->getObjectForTrait(ProjectTrait::class);
 
     $this->assertNull($obj->getProject('test'));
+    $this->assertFalse($obj->hasProjects());
 
     $a = new Project('Test\\Trait', $strategy);
     $b = new Project('Test\\Sequence', $strategy);
@@ -22,6 +23,7 @@ class ProjectTraitTest extends TestCase {
     $this->assertNull($obj->getProject('test'));
     $this->assertEquals($a, $obj->getProject('Test\\Trait'));
     $this->assertEquals($b, $obj->getProject('Test\\Sequence'));
+    $this->assertTrue($obj->hasProjects());
 
     $c = new Project('Test', $strategy);
     $obj->addProjects([$c]);

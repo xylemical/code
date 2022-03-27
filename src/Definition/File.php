@@ -66,7 +66,7 @@ class File implements DefinitionInterface {
    * @return bool
    *   The primary.
    */
-  public function getPrimary(): bool {
+  public function isPrimary(): bool {
     return $this->primary;
   }
 

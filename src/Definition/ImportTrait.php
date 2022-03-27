@@ -113,4 +113,15 @@ trait ImportTrait {
     return $this;
   }
 
+  /**
+   *
+   * Check there are imports defined.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasImports(): bool {
+    return count($this->imports) > 0;
+  }
+
 }

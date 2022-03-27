@@ -113,4 +113,15 @@ trait ProjectTrait {
     return $this;
   }
 
+  /**
+   *
+   * Check there are projects defined.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasProjects(): bool {
+    return count($this->projects) > 0;
+  }
+
 }

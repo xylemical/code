@@ -113,4 +113,15 @@ trait ConstantTrait {
     return $this;
   }
 
+  /**
+   *
+   * Check there are constants defined.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasConstants(): bool {
+    return count($this->constants) > 0;
+  }
+
 }

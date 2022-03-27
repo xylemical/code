@@ -14,9 +14,13 @@ class FileTest extends TestCase {
     $this->assertEquals($a, $b);
     $this->assertNotEquals($a, $c);
     $this->assertEquals('dummy', $a->getFilename());
+    $this->assertTrue($a->isPrimary());
 
     $a->setFilename('test');
     $this->assertEquals('test', $a->getFilename());
+
+    $a->setPrimary(FALSE);
+    $this->assertFalse($a->isPrimary());
   }
 
 }

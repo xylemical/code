@@ -113,4 +113,15 @@ trait MethodTrait {
     return $this;
   }
 
+  /**
+   *
+   * Check there are methods defined.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasMethods(): bool {
+    return count($this->methods) > 0;
+  }
+
 }

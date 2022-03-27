@@ -113,4 +113,15 @@ trait PropertyTrait {
     return $this;
   }
 
+  /**
+   *
+   * Check there are properties defined.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasProperties(): bool {
+    return count($this->properties) > 0;
+  }
+
 }

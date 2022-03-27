@@ -113,4 +113,15 @@ trait ContractTrait {
     return $this;
   }
 
+  /**
+   *
+   * Check there are contracts defined.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasContracts(): bool {
+    return count($this->contracts) > 0;
+  }
+
 }

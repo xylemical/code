@@ -10,6 +10,7 @@ class StructureTraitTest extends TestCase {
     $obj = $this->getObjectForTrait(StructureTrait::class);
 
     $this->assertNull($obj->getStructure('test'));
+    $this->assertFalse($obj->hasStructures());
 
     $a = new Structure('Test\\Trait');
     $b = new Structure('Test\\Sequence');
@@ -19,6 +20,7 @@ class StructureTraitTest extends TestCase {
     $this->assertNull($obj->getStructure('test'));
     $this->assertEquals($a, $obj->getStructure('Test\\Trait'));
     $this->assertEquals($b, $obj->getStructure('Test\\Sequence'));
+    $this->assertTrue($obj->hasStructures());
 
     $c = new Structure('Test');
     $obj->addStructures([$c]);

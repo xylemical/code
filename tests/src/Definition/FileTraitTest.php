@@ -10,6 +10,7 @@ class FileTraitTest extends TestCase {
     $obj = $this->getObjectForTrait(FileTrait::class);
 
     $this->assertNull($obj->getFile('test'));
+    $this->assertFalse($obj->hasFiles());
 
     $a = new File('Test\\Trait');
     $b = new File('Test\\Sequence');
@@ -19,6 +20,7 @@ class FileTraitTest extends TestCase {
     $this->assertNull($obj->getFile('test'));
     $this->assertEquals($a, $obj->getFile('Test\\Trait'));
     $this->assertEquals($b, $obj->getFile('Test\\Sequence'));
+    $this->assertTrue($obj->hasFiles());
 
     $c = new File('Test');
     $obj->addFiles([$c]);

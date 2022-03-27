@@ -113,4 +113,15 @@ trait StructureTrait {
     return $this;
   }
 
+  /**
+   *
+   * Check there are structures defined.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasStructures(): bool {
+    return count($this->structures) > 0;
+  }
+
 }

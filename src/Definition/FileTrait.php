@@ -113,4 +113,15 @@ trait FileTrait {
     return $this;
   }
 
+  /**
+   *
+   * Check there are files defined.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasFiles(): bool {
+    return count($this->files) > 0;
+  }
+
 }

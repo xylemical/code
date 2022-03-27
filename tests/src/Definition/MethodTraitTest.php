@@ -10,6 +10,7 @@ class MethodTraitTest extends TestCase {
     $obj = $this->getObjectForTrait(MethodTrait::class);
 
     $this->assertNull($obj->getMethod('test'));
+    $this->assertFalse($obj->hasMethods());
 
     $a = new Method('Test\\Trait');
     $b = new Method('Test\\Sequence');
@@ -19,6 +20,7 @@ class MethodTraitTest extends TestCase {
     $this->assertNull($obj->getMethod('test'));
     $this->assertEquals($a, $obj->getMethod('Test\\Trait'));
     $this->assertEquals($b, $obj->getMethod('Test\\Sequence'));
+    $this->assertTrue($obj->hasMethods());
 
     $c = new Method('Test');
     $obj->addMethods([$c]);

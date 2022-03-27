@@ -10,6 +10,7 @@ class ParameterTraitTest extends TestCase {
     $obj = $this->getObjectForTrait(ParameterTrait::class);
 
     $this->assertNull($obj->getParameter('test'));
+    $this->assertFalse($obj->hasParameters());
 
     $a = new Parameter('Test\\Trait');
     $b = new Parameter('Test\\Sequence');
@@ -19,6 +20,7 @@ class ParameterTraitTest extends TestCase {
     $this->assertNull($obj->getParameter('test'));
     $this->assertEquals($a, $obj->getParameter('Test\\Trait'));
     $this->assertEquals($b, $obj->getParameter('Test\\Sequence'));
+    $this->assertTrue($obj->hasParameters());
 
     $c = new Parameter('Test');
     $obj->addParameters([$c]);

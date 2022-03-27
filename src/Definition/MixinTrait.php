@@ -113,4 +113,15 @@ trait MixinTrait {
     return $this;
   }
 
+  /**
+   *
+   * Check there are mixins defined.
+   *
+   * @return bool
+   *   The result.
+   */
+  public function hasMixins(): bool {
+    return count($this->mixins) > 0;
+  }
+
 }

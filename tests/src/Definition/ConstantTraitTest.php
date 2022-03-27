@@ -12,6 +12,7 @@ class ConstantTraitTest extends TestCase {
     $value = new Expression();
 
     $this->assertNull($obj->getConstant('test'));
+    $this->assertFalse($obj->hasConstants());
 
     $a = new Constant('Test\\Trait', $value);
     $b = new Constant('Test\\Sequence', $value);
@@ -21,6 +22,7 @@ class ConstantTraitTest extends TestCase {
     $this->assertNull($obj->getConstant('test'));
     $this->assertEquals($a, $obj->getConstant('Test\\Trait'));
     $this->assertEquals($b, $obj->getConstant('Test\\Sequence'));
+    $this->assertTrue($obj->hasConstants());
 
     $c = new Constant('Test', $value);
     $obj->addConstants([$c]);

@@ -10,6 +10,7 @@ class MixinTraitTest extends TestCase {
     $obj = $this->getObjectForTrait(MixinTrait::class);
 
     $this->assertNull($obj->getMixin('test'));
+    $this->assertFalse($obj->hasMixins());
 
     $a = new Mixin('Test\\Trait');
     $b = new Mixin('Test\\Sequence');
@@ -19,6 +20,7 @@ class MixinTraitTest extends TestCase {
     $this->assertNull($obj->getMixin('test'));
     $this->assertEquals($a, $obj->getMixin('Test\\Trait'));
     $this->assertEquals($b, $obj->getMixin('Test\\Sequence'));
+    $this->assertTrue($obj->hasMixins());
 
     $c = new Mixin('Test');
     $obj->addMixins([$c]);

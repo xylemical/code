@@ -11,6 +11,7 @@ class ImportTraitTest extends TestCase {
     $obj = $this->getObjectForTrait(ImportTrait::class);
 
     $this->assertNull($obj->getImport('test'));
+    $this->assertFalse($obj->hasImports());
 
     $a = new Import(FullyQualifiedName::create('Test\\Trait'));
     $b = new Import(FullyQualifiedName::create('Test\\Sequence'));
@@ -20,6 +21,7 @@ class ImportTraitTest extends TestCase {
     $this->assertNull($obj->getImport('test'));
     $this->assertEquals($a, $obj->getImport('Test\\Trait'));
     $this->assertEquals($b, $obj->getImport('Test\\Sequence'));
+    $this->assertTrue($obj->hasImports());
 
     $c = new Import(FullyQualifiedName::create('Test'));
     $obj->addImports([$c]);

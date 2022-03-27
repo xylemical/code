@@ -10,6 +10,7 @@ class PropertyTraitTest extends TestCase {
     $obj = $this->getObjectForTrait(PropertyTrait::class);
 
     $this->assertNull($obj->getProperty('test'));
+    $this->assertFalse($obj->hasProperties());
 
     $a = new Property('Test\\Trait');
     $b = new Property('Test\\Sequence');
@@ -19,6 +20,7 @@ class PropertyTraitTest extends TestCase {
     $this->assertNull($obj->getProperty('test'));
     $this->assertEquals($a, $obj->getProperty('Test\\Trait'));
     $this->assertEquals($b, $obj->getProperty('Test\\Sequence'));
+    $this->assertTrue($obj->hasProperties());
 
     $c = new Property('Test');
     $obj->addProperties([$c]);

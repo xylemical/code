@@ -10,6 +10,7 @@ class ContractTraitTest extends TestCase {
     $obj = $this->getObjectForTrait(ContractTrait::class);
 
     $this->assertNull($obj->getContract('test'));
+    $this->assertFalse($obj->hasContracts());
 
     $a = new Contract('Test\\Trait');
     $b = new Contract('Test\\Sequence');
@@ -19,6 +20,7 @@ class ContractTraitTest extends TestCase {
     $this->assertNull($obj->getContract('test'));
     $this->assertEquals($a, $obj->getContract('Test\\Trait'));
     $this->assertEquals($b, $obj->getContract('Test\\Sequence'));
+    $this->assertTrue($obj->hasContracts());
 
     $c = new Contract('Test');
     $obj->addContracts([$c]);
