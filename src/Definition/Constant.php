@@ -5,6 +5,7 @@ namespace Xylemical\Code\Definition;
 use Xylemical\Code\DefinitionInterface;
 use Xylemical\Code\DocumentationTrait;
 use Xylemical\Code\ExpressionInterface;
+use Xylemical\Code\NamedInterface;
 use Xylemical\Code\NameTrait;
 use Xylemical\Code\ObjectManager;
 use Xylemical\Code\ValueTrait;
@@ -13,7 +14,7 @@ use Xylemical\Code\VisibilityTrait;
 /**
  * Provides a named constant value.
  */
-class Constant implements DefinitionInterface {
+class Constant implements DefinitionInterface, NamedInterface {
 
   use DocumentationTrait;
   use NameTrait;

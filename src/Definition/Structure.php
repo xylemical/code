@@ -4,6 +4,7 @@ namespace Xylemical\Code\Definition;
 
 use Xylemical\Code\DocumentationTrait;
 use Xylemical\Code\FullyQualifiedName;
+use Xylemical\Code\FullyQualifiedNamedInterface;
 use Xylemical\Code\FullyQualifiedNameTrait;
 use Xylemical\Code\ObjectManager;
 use Xylemical\Code\VisibilityTrait;
@@ -11,7 +12,7 @@ use Xylemical\Code\VisibilityTrait;
 /**
  * The equivalent of a php object.
  */
-class Structure implements StructureInterface {
+class Structure implements StructureInterface, FullyQualifiedNamedInterface {
 
   use AbstractTrait;
   use ConstantTrait;

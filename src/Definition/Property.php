@@ -4,6 +4,7 @@ namespace Xylemical\Code\Definition;
 
 use Xylemical\Code\DefinitionInterface;
 use Xylemical\Code\DocumentationTrait;
+use Xylemical\Code\NamedInterface;
 use Xylemical\Code\NameTrait;
 use Xylemical\Code\ObjectManager;
 use Xylemical\Code\TypeTrait;
@@ -13,7 +14,7 @@ use Xylemical\Code\VisibilityTrait;
 /**
  * Provides a property definition.
  */
-class Property implements DefinitionInterface {
+class Property implements DefinitionInterface, NamedInterface {
 
   use DocumentationTrait;
   use NameTrait;

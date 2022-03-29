@@ -4,6 +4,7 @@ namespace Xylemical\Code\Definition;
 
 use Xylemical\Code\DefinitionInterface;
 use Xylemical\Code\DocumentationTrait;
+use Xylemical\Code\NamedInterface;
 use Xylemical\Code\NameTrait;
 use Xylemical\Code\ObjectManager;
 use Xylemical\Code\TypeTrait;
@@ -13,7 +14,7 @@ use Xylemical\Code\VisibilityTrait;
 /**
  * Provides a method definition.
  */
-class Method implements DefinitionInterface {
+class Method implements DefinitionInterface, NamedInterface {
 
   use AbstractTrait;
   use DocumentationTrait;

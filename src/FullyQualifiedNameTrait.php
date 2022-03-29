@@ -4,6 +4,8 @@ namespace Xylemical\Code;
 
 /**
  * Provides fully qualified name accessors.
+ *
+ * @see \Xylemical\Code\FullyQualifiedNamedInterface
  */
 trait FullyQualifiedNameTrait {
 

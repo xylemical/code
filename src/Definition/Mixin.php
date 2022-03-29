@@ -4,13 +4,14 @@ namespace Xylemical\Code\Definition;
 
 use Xylemical\Code\DocumentationTrait;
 use Xylemical\Code\FullyQualifiedName;
+use Xylemical\Code\FullyQualifiedNamedInterface;
 use Xylemical\Code\FullyQualifiedNameTrait;
 use Xylemical\Code\ObjectManager;
 
 /**
  * Provides a mixin definition.
  */
-class Mixin implements StructureInterface {
+class Mixin implements StructureInterface, FullyQualifiedNamedInterface {
 
   use ConstantTrait;
   use MixinTrait;
