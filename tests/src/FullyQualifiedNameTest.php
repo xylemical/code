@@ -1,12 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\FullyQualifiedName.
+ */
 class FullyQualifiedNameTest extends TestCase {
 
-  public function providerTestFullyQualifiedName() {
+  /**
+   * Provides test data for testFullyQualifiedName().
+   *
+   * @return array
+   *   The test data.
+   */
+  public function providerTestFullyQualifiedName(): array {
     return [
       ['unknown', 'unknown', 'unknown', []],
       ['\\unknown', 'unknown', 'unknown', []],
@@ -17,9 +28,11 @@ class FullyQualifiedNameTest extends TestCase {
   }
 
   /**
+   * Tests sanity.
+   *
    * @dataProvider providerTestFullyQualifiedName
    */
-  public function testFullyQualifiedName($name, $fullname, $shortname, $namespaces, $separator = NULL) {
+  public function testFullyQualifiedName(string $name, string $fullname, string $shortname, array $namespaces, ?string $separator = NULL): void {
     if ($separator) {
       FullyQualifiedName::setSeparator($separator);
       $this->assertEquals($separator, FullyQualifiedName::getSeparator());
@@ -47,7 +60,10 @@ class FullyQualifiedNameTest extends TestCase {
     $this->assertFalse($obj->equals(new FullyQualifiedName('alias')));
   }
 
-  public function testCreation() {
+  /**
+   * Tests creation.
+   */
+  public function testCreation(): void {
     $obj = FullyQualifiedName::create('unknown');
     $this->assertEquals($obj, FullyQualifiedName::create('unknown'));
   }

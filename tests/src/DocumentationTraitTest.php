@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\DocumentationTrait.
+ */
 class DocumentationTraitTest extends TestCase {
 
-  public function testDocumentation() {
+  /**
+   * Tests sanity.
+   */
+  public function testDocumentation(): void {
     $obj = $this->getObjectForTrait(DocumentationTrait::class);
 
     $this->assertEquals(Documentation::class, get_class($obj->getDocumentation()));

@@ -1,13 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Definition;
 
 use PHPUnit\Framework\TestCase;
 use Xylemical\Code\FullyQualifiedName;
 
+/**
+ * Tests \Xylemical\Code\Definition\ImportTrait.
+ */
 class ImportTraitTest extends TestCase {
 
-  public function testImport() {
+  /**
+   * Tests sanity.
+   */
+  public function testImport(): void {
     $obj = $this->getObjectForTrait(ImportTrait::class);
 
     $this->assertNull($obj->getImport('test'));

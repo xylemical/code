@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Definition;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\Definition\MixinTrait.
+ */
 class MixinTraitTest extends TestCase {
 
-  public function testMixin() {
+  /**
+   * Tests sanity.
+   */
+  public function testMixin(): void {
     $obj = $this->getObjectForTrait(MixinTrait::class);
 
     $this->assertNull($obj->getMixin('test'));

@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Definition;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\Definition\MethodTrait.
+ */
 class MethodTraitTest extends TestCase {
 
-  public function testMethod() {
+  /**
+   * Tests sanity.
+   */
+  public function testMethod(): void {
     $obj = $this->getObjectForTrait(MethodTrait::class);
 
     $this->assertNull($obj->getMethod('test'));

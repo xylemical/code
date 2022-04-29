@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Definition;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\Definition\PropertyTrait.
+ */
 class PropertyTraitTest extends TestCase {
 
-  public function testProperty() {
+  /**
+   * Tests sanity.
+   */
+  public function testProperty(): void {
     $obj = $this->getObjectForTrait(PropertyTrait::class);
 
     $this->assertNull($obj->getProperty('test'));

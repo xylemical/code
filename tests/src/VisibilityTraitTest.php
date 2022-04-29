@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\VisibilityTrait.
+ */
 class VisibilityTraitTest extends TestCase {
 
-  public function testVisibility() {
+  /**
+   * Test sanity.
+   */
+  public function testVisibility(): void {
     $obj = $this->getObjectForTrait(VisibilityTrait::class);
 
     $this->assertEquals(Visibility::class, get_class($obj->getVisibility()));

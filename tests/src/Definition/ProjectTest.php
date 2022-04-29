@@ -1,16 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Definition;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Xylemical\Code\FullyQualifiedName;
 
+/**
+ * Tests \Xylemical\Code\Definition\Project.
+ */
 class ProjectTest extends TestCase {
 
   use ProphecyTrait;
 
-  public function testProject() {
+  /**
+   * Tests sanity.
+   */
+  public function testProject(): void {
     $strategy = $this->getMockBuilder(FilenameStrategyInterface::class)
       ->getMock();
 
@@ -36,7 +44,10 @@ class ProjectTest extends TestCase {
     $this->assertEquals($strategy, $project->getStrategy());
   }
 
-  public function testStructure() {
+  /**
+   * Tests structure within a project.
+   */
+  public function testStructure(): void {
     $strategy = $this->prophesize(FilenameStrategyInterface::class);
     $strategy
       ->getFilenames(FullyQualifiedName::create('test'))
@@ -72,7 +83,6 @@ class ProjectTest extends TestCase {
       $project->getFile('src/Test.php'),
       $project->getFile('src/Dummy.php'),
     ], $project->getFilesByName('dummy'));
-
 
     $project->removeStructure($dummy);
     $this->assertEquals([

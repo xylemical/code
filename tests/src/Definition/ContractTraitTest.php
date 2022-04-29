@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Definition;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\Definition\ContractTrait.
+ */
 class ContractTraitTest extends TestCase {
 
-  public function testContract() {
+  /**
+   * Tests sanity.
+   */
+  public function testContract(): void {
     $obj = $this->getObjectForTrait(ContractTrait::class);
 
     $this->assertNull($obj->getContract('test'));

@@ -1,15 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
+/**
+ * Tests \Xylemical\Code\ValueTrait.
+ */
 class ValueTraitTest extends TestCase {
 
   use ProphecyTrait;
 
-  public function testValue() {
+  /**
+   * Tests sanity.
+   */
+  public function testValue(): void {
     $obj = $this->getObjectForTrait(ValueTrait::class);
 
     $this->assertEquals(Expression::class, get_class($obj->getValue()));

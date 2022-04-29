@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Definition;
 
 /**
@@ -44,7 +46,7 @@ trait ImportTrait {
   }
 
   /**
-   * Add a import to the definition.
+   * Add an import to the definition.
    *
    * @param \Xylemical\Code\Definition\Import $import
    *   The import.
@@ -52,7 +54,7 @@ trait ImportTrait {
    * @return $this
    */
   public function addImport(Import $import): static {
-    $name = strtolower($import->getName());
+    $name = strtolower((string) $import->getName());
     if (!isset($this->imports[$name])) {
       $this->setImport($import);
     }
@@ -68,7 +70,7 @@ trait ImportTrait {
    * @return $this
    */
   public function setImport(Import $import): static {
-    $this->imports[strtolower($import->getName())] = $import;
+    $this->imports[strtolower((string) $import->getName())] = $import;
     return $this;
   }
 

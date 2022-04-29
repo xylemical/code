@@ -1,12 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Util;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\Util\Indenter.
+ */
 class IndenterTest extends TestCase {
 
-  public function providerTestIndent() {
+  /**
+   * Provides test data for testIndent().
+   *
+   * @return array
+   *   The test data.
+   */
+  public function providerTestIndent(): array {
     return [
       ["a", "  a"],
       ["a", " a", 1],
@@ -25,13 +36,21 @@ class IndenterTest extends TestCase {
   }
 
   /**
+   * Tests the indentation process.
+   *
    * @dataProvider providerTestIndent
    */
-  public function testIndent($text, $expected, $spaces = 2, $levels = 1) {
+  public function testIndent(string $text, string $expected, int $spaces = 2, int $levels = 1): void {
     $this->assertEquals($expected, Indenter::indent($text, $spaces, $levels));
   }
 
-  public function providerTestOutdent() {
+  /**
+   * Provides test data for testOutdent().
+   *
+   * @return array
+   *   The test data.
+   */
+  public function providerTestOutdent(): array {
     return [
       ["  a", "a"],
       ["  a", " a", 1],
@@ -46,13 +65,21 @@ class IndenterTest extends TestCase {
   }
 
   /**
+   * Test the outdentation process.
+   *
    * @dataProvider providerTestOutdent
    */
-  public function testOutdent($text, $expected, $spaces = 2, $levels = 1) {
+  public function testOutdent(string $text, string $expected, int $spaces = 2, int $levels = 1): void {
     $this->assertEquals($expected, Indenter::outdent($text, $spaces, $levels));
   }
 
-  public function providerTestDefix() {
+  /**
+   * Provides test data for the defix process.
+   *
+   * @return array
+   *   The test data.
+   */
+  public function providerTestDefix(): array {
     return [
       ["  a", "a"],
       ["  a", " a", 1],
@@ -67,9 +94,11 @@ class IndenterTest extends TestCase {
   }
 
   /**
+   * Tests the defix process.
+   *
    * @dataProvider providerTestDefix
    */
-  public function testDefix($text, $expected, $spaces = 2, $levels = 1) {
+  public function testDefix(string $text, string $expected, int $spaces = 2, int $levels = 1): void {
     $this->assertEquals($expected, Indenter::defix($text, $spaces, $levels));
   }
 

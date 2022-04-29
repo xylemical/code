@@ -1,13 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Definition;
 
 use PHPUnit\Framework\TestCase;
 use Xylemical\Code\Expression;
 
+/**
+ * Tests \Xylemical\Code\Definition\ConstantTrait.
+ */
 class ConstantTraitTest extends TestCase {
 
-  public function testConstant() {
+  /**
+   * Tests sanity.
+   */
+  public function testConstant(): void {
     $obj = $this->getObjectForTrait(ConstantTrait::class);
     $value = new Expression();
 

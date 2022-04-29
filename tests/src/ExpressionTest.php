@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\Expression.
+ */
 class ExpressionTest extends TestCase {
 
-  public function testExpression() {
+  /**
+   * Tests sanity.
+   */
+  public function testExpression(): void {
     $contents = 'test contents';
     $obj = new Expression($contents);
     $this->assertEquals($contents, $obj->getCode()->getContents());

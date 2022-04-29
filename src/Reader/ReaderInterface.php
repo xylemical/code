@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Reader;
 
 use Xylemical\Code\DefinitionInterface;

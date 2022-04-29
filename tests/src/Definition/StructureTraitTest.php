@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Definition;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\Definition\StructureTrait.
+ */
 class StructureTraitTest extends TestCase {
 
-  public function testStructure() {
+  /**
+   * Tests sanity.
+   */
+  public function testStructure(): void {
     $obj = $this->getObjectForTrait(StructureTrait::class);
 
     $this->assertNull($obj->getStructure('test'));

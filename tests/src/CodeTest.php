@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\Code.
+ */
 class CodeTest extends TestCase {
 
-  public function testCode() {
+  /**
+   * Tests sanity.
+   */
+  public function testCode(): void {
     $obj = new Code('python', 'contents');
     $this->assertEquals('python', $obj->getLanguage());
     $this->assertEquals('contents', $obj->getContents());

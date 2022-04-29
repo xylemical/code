@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Definition;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\Definition\File.
+ */
 class FileTest extends TestCase {
 
-  public function testFile() {
+  /**
+   * Tests sanity.
+   */
+  public function testFile(): void {
     $a = File::create('dummy');
     $b = File::create('dummy');
     $c = File::create('test');

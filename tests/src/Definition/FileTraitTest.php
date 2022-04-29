@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Definition;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\Definition\FileTrait.
+ */
 class FileTraitTest extends TestCase {
 
-  public function testFile() {
+  /**
+   * Tests sanity.
+   */
+  public function testFile(): void {
     $obj = $this->getObjectForTrait(FileTrait::class);
 
     $this->assertNull($obj->getFile('test'));

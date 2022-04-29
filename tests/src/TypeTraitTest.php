@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\TypeTrait.
+ */
 class TypeTraitTest extends TestCase {
 
-  public function testType() {
+  /**
+   * Tests sanity.
+   */
+  public function testType(): void {
     $obj = $this->getObjectForTrait(TypeTrait::class);
 
     $this->assertEquals(FullyQualifiedName::class, get_class($obj->getType()));

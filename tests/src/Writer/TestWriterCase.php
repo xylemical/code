@@ -1,12 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Writer;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Provides test case for writers.
+ */
 class TestWriterCase extends TestCase {
 
-  protected function getSources(string $fixturePath) {
+  /**
+   * Get the sources used for the test case.
+   *
+   * @param string $fixturePath
+   *   The fixture location.
+   *
+   * @return array
+   *   The test data.
+   */
+  protected function getSources(string $fixturePath): array {
     $tests = [];
 
     $path = realpath(__DIR__ . '/../../fixtures/sources');

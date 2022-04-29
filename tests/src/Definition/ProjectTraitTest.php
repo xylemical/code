@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xylemical\Code\Definition;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests \Xylemical\Code\Definition\ProjectTrait.
+ */
 class ProjectTraitTest extends TestCase {
 
-  public function testProject() {
+  /**
+   * Tests sanity.
+   */
+  public function testProject(): void {
     $strategy = $this->getMockBuilder(FilenameStrategyInterface::class)
       ->getMock();
 
