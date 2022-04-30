@@ -12,7 +12,7 @@ $manager = $manager ?? new NameManager(new Language());
 $manager->get('Test\\Code')->setShorthand('Shorthand');
 return (new Method('method', $manager))
   ->setVisibility(Visibility::PROTECTED)
-  ->setType('Test\\Code')
+  ->setType('Test\\Bar')
   ->setDocumentation(new Documentation('Test'))
   ->setValue(new Expression('tank'))
   ->setAbstract(TRUE)
@@ -20,6 +20,6 @@ return (new Method('method', $manager))
   ->addParameters([
     (new Parameter('abc', $manager))
       ->setDocumentation(new Documentation('testing'))
-      ->setType('Test\\Code')
+      ->setType('Code\\Table')
       ->setValue(new Expression('done')),
   ]);
