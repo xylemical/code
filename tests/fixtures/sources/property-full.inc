@@ -4,11 +4,14 @@ use Xylemical\Code\Definition\Property;
 use Xylemical\Code\Documentation;
 use Xylemical\Code\Expression;
 use Xylemical\Code\FullyQualifiedName;
+use Xylemical\Code\Language;
+use Xylemical\Code\NameManager;
 use Xylemical\Code\Visibility;
 
-return (new Property('property'))
+$manager = $manager ?? new NameManager(new Language());
+return (new Property('property', $manager))
   ->setVisibility(Visibility::PROTECTED)
-  ->setType((new FullyQualifiedName('Test\\Code'))->setShorthand('Shorthand'))
+  ->setType((new FullyQualifiedName('Test\\Code', $manager))->setShorthand('Shorthand'))
   ->setDocumentation(new Documentation('Test'))
   ->setStatic(TRUE)
   ->setValue(new Expression('tank'));

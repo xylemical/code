@@ -3,13 +3,12 @@
 use Xylemical\Code\Definition\Contract;
 use Xylemical\Code\Documentation;
 use Xylemical\Code\Visibility;
+use Xylemical\Code\NameManager;
+use Xylemical\Code\Language;
 
-return (new Contract('Test\\Code'))
-  ->setVisibility(Visibility::PROTECTED)
+return (new Contract('Test\\Code', $manager ?? new NameManager(new Language())))
   ->setDocumentation(new Documentation('test'))
-  ->addConstants([
+  ->addElements([
     include 'constant-full.inc',
-  ])
-  ->addMethods([
     include 'method-full.inc',
   ]);

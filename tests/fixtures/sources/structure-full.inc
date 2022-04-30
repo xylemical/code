@@ -2,16 +2,14 @@
 
 use Xylemical\Code\Definition\Structure;
 use Xylemical\Code\Documentation;
+use Xylemical\Code\NameManager;
+use Xylemical\Code\Language;
 
-return (new Structure('Test\\Code'))
+return (new Structure('Test\\Code', $manager ?? new NameManager(new Language())))
   ->setDocumentation(new Documentation('test'))
-  ->addConstants([
+  ->addElements([
     include 'constant-full.inc',
-  ])
-  ->addMethods([
     include 'method-full.inc',
-  ])
-  ->addProperties([
     include 'property-full.inc',
   ])
   ->addMixins([

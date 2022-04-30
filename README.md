@@ -18,14 +18,16 @@ Creating a class representation:
 <?php
 
 use Xylemical\Code\Expression;
+use Xylemical\Code\Definition\File;
 use Xylemical\Code\Definition\Method;
 use Xylemical\Code\Definition\Property;
 use Xylemical\Code\Definition\Structure;
 use Xylemical\Code\Definition\Contract;
 
-$class = Structure::create('Xylemical\\Code\\Representation')
+$file = File::create('test.php');
+$class = Structure::create('Xylemical\\Code\\Representation', $file->getNameManager())
   ->addContract(Contract::create('Xylemical\\Code\\RepresentationInterface'))
-  ->addProperty(Property::create('rep'))
+  ->addElement(Property::create('rep'))
   ->addMethod(Method::create('show')->setBody(Expression::create('return $this;')));
 ```
 
@@ -35,9 +37,7 @@ The model definition is equivalent to:
 <?php
 namespace Xylemical\Code;
 
-use Xylemical\Code\RepresentationInterface;
-
-class Representation implements RepresentationInterface {
+class Representation implements \Xylemical\Code\RepresentationInterface {
 
   public $rep;
 
