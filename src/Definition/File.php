@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Xylemical\Code\Definition;
 
 use Xylemical\Code\DefinitionInterface;
+use Xylemical\Code\FullyQualifiedName;
 use Xylemical\Code\Language;
 use Xylemical\Code\LanguageInterface;
 use Xylemical\Code\NameManager;
@@ -234,9 +235,19 @@ class File implements DefinitionInterface {
    *   The namespace
    */
   public function getNamespace(): ?array {
+    return $this->getFullyQualifiedNamespace()?->getNamespace();
+  }
+
+  /**
+   * Get the fully qualified namespace.
+   *
+   * @return \Xylemical\Code\FullyQualifiedName|null
+   *   The namespace or NULL.
+   */
+  public function getFullyQualifiedNamespace(): ?FullyQualifiedName {
     if (count($this->structures)) {
       $target = reset($this->structures);
-      return $target->getFullyQualifiedName()->getNamespace();
+      return $target->getFullyQualifiedName();
     }
     return NULL;
   }
