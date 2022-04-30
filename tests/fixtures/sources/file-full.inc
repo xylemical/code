@@ -2,8 +2,9 @@
 
 use Xylemical\Code\Definition\File;
 
-return (new File('test'))
-  ->addStructures([
+$file = (new File('test'));
+$manager = $file->getNameManager();
+return $file->addStructures([
     include 'mixin-full.inc',
     include 'structure-full.inc',
     include 'contract-full.inc',
