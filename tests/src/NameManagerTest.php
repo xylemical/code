@@ -40,6 +40,9 @@ class NameManagerTest extends TestCase {
       'test\\foo',
       'test::foo',
     ], array_map('strval', $manager->all()));
+
+    $manager->reset();
+    $this->assertEquals([], $manager->all());
   }
 
 }

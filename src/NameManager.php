@@ -87,4 +87,11 @@ final class NameManager {
     return array_values($this->names);
   }
 
+  /**
+   * Reset the names.
+   */
+  public function reset(): void {
+    $this->names = [];
+  }
+
 }

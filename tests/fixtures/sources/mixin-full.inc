@@ -2,8 +2,8 @@
 
 use Xylemical\Code\Definition\Mixin;
 use Xylemical\Code\Documentation;
-use Xylemical\Code\NameManager;
 use Xylemical\Code\Language;
+use Xylemical\Code\NameManager;
 
 return (new Mixin('Test\\Code', $manager ?? new NameManager(new Language())))
   ->setDocumentation(new Documentation('test'))
