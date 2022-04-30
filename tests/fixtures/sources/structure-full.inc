@@ -12,9 +12,5 @@ return (new Structure('Test\\Code', $manager ?? new NameManager(new Language()))
     include 'method-full.inc',
     include 'property-full.inc',
   ])
-  ->addMixins([
-    include 'mixin-generic.inc',
-  ])
-  ->addContracts([
-    include 'contract-full.inc',
-  ]);
+  ->addMixins(['Test\\Code'])
+  ->addContracts(['Test\\Code']);

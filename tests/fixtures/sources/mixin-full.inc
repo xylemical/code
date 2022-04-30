@@ -12,6 +12,4 @@ return (new Mixin('Test\\Code', $manager ?? new NameManager(new Language())))
     include 'method-full.inc',
     include 'property-full.inc',
   ])
-  ->addMixins([
-    include 'mixin-generic.inc',
-  ]);
+  ->addMixins(['Test\\Code']);
