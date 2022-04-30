@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Xylemical\Code\Definition;
 
 use Xylemical\Code\DefinitionInterface;
+use Xylemical\Code\Language;
 use Xylemical\Code\LanguageInterface;
 use Xylemical\Code\NameManager;
 
@@ -51,7 +52,7 @@ class File implements DefinitionInterface {
    */
   public function __construct(string $filename, ?LanguageInterface $language = NULL) {
     $this->filename = $filename;
-    $this->manager = new NameManager($language);
+    $this->manager = new NameManager($language ?: new Language());
   }
 
   /**
