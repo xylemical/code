@@ -26,6 +26,7 @@ class FileTest extends TestCase {
     $this->assertNotSame($a, $c);
     $this->assertEquals('dummy', $a->getFilename());
     $this->assertTrue($a->isPrimary());
+    $this->assertEquals([], $a->getStructures());
 
     $this->assertSame($language, $a->getLanguage());
     $this->assertSame($language, $a->getNameManager()->getLanguage());
