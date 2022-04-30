@@ -40,7 +40,7 @@ class File implements DefinitionInterface {
    *
    * @var \Xylemical\Code\Definition\StructureInterface[]
    */
-  protected array $structures;
+  protected array $structures = [];
 
   /**
    * File constructor.
