@@ -7,14 +7,7 @@ namespace Xylemical\Code;
 /**
  * Provides a fully qualified namespaced name.
  */
-class FullyQualifiedName {
-
-  /**
-   * The separator used for fully qualified names.
-   *
-   * @var string
-   */
-  protected static string $separator = '\\';
+class FullyQualifiedName implements \Stringable {
 
   /**
    * The parts of the name.
@@ -31,13 +24,23 @@ class FullyQualifiedName {
   protected string $shorthand = '';
 
   /**
+   * The language.
+   *
+   * @var \Xylemical\Code\NameManager
+   */
+  protected NameManager $manager;
+
+  /**
    * FullyQualifiedName constructor.
    *
    * @param string $name
    *   The fully qualified name.
+   * @param \Xylemical\Code\NameManager $manager
+   *   The manager.
    */
-  public function __construct(string $name) {
-    $separator = self::getSeparator() ?: '\\';
+  public function __construct(string $name, NameManager $manager) {
+    $this->manager = $manager;
+    $separator = $manager->getLanguage()->getSeparator() ?: '\\';
     $this->parts = explode($separator, ltrim($name, $separator));
   }
 
@@ -119,33 +122,20 @@ class FullyQualifiedName {
   }
 
   /**
-   * Convert name into string.
+   * Get the language.
    *
-   * @return string
-   *   The name.
+   * @return \Xylemical\Code\LanguageInterface
+   *   The language.
+   */
+  public function getLanguage(): LanguageInterface {
+    return $this->manager->getLanguage();
+  }
+
+  /**
+   * {@inheritdoc}
    */
   public function __toString() {
-    return implode(self::getSeparator(), $this->getFullName());
-  }
-
-  /**
-   * Set the separator used for fully qualified names.
-   *
-   * @param string $separator
-   *   The separator.
-   */
-  public static function setSeparator(string $separator): void {
-    self::$separator = $separator;
-  }
-
-  /**
-   * Get the separator used for fully qualified names.
-   *
-   * @return string
-   *   The separator.
-   */
-  public static function getSeparator(): string {
-    return self::$separator;
+    return implode($this->getLanguage()->getSeparator(), $this->getFullName());
   }
 
   /**
@@ -153,11 +143,14 @@ class FullyQualifiedName {
    *
    * @param string $name
    *   The name.
+   * @param \Xylemical\Code\NameManager $manager
+   *   The name manager.
    *
-   * @return $this
+   * @return \Xylemical\Code\FullyQualifiedName
+   *   The common name.
    */
-  public static function create(string $name): static {
-    return ObjectManager::get(FullyQualifiedName::class, strtolower($name), new FullyQualifiedName($name));
+  public static function create(string $name, NameManager $manager): FullyQualifiedName {
+    return $manager->get($name);
   }
 
 }

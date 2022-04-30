@@ -4,27 +4,12 @@ declare(strict_types=1);
 
 namespace Xylemical\Code\Definition;
 
-use Xylemical\Code\DocumentationTrait;
 use Xylemical\Code\FullyQualifiedName;
-use Xylemical\Code\FullyQualifiedNamedInterface;
-use Xylemical\Code\FullyQualifiedNameTrait;
-use Xylemical\Code\ObjectManager;
-use Xylemical\Code\VisibilityTrait;
 
 /**
  * The equivalent of a php object.
  */
-class Structure implements StructureInterface, FullyQualifiedNamedInterface {
-
-  use AbstractTrait;
-  use ConstantTrait;
-  use ContractTrait;
-  use DocumentationTrait;
-  use FullyQualifiedNameTrait;
-  use MethodTrait;
-  use MixinTrait;
-  use PropertyTrait;
-  use VisibilityTrait;
+class Structure extends AbstractStructure {
 
   /**
    * The object is final, and cannot be inherited from.
@@ -34,33 +19,18 @@ class Structure implements StructureInterface, FullyQualifiedNamedInterface {
   protected bool $final = FALSE;
 
   /**
+   * The object is abstract, cannot be instantiated.
+   *
+   * @var bool
+   */
+  protected bool $abstract = FALSE;
+
+  /**
    * The parent structure.
    *
-   * @var \Xylemical\Code\Definition\Structure|null
+   * @var \Xylemical\Code\FullyQualifiedName|null
    */
-  protected ?Structure $parent = NULL;
-
-  /**
-   * Structure constructor.
-   *
-   * @param string $name
-   *   The name.
-   */
-  public function __construct(string $name) {
-    $this->name = new FullyQualifiedName($name);
-  }
-
-  /**
-   * Create a Structure.
-   *
-   * @param string $name
-   *   The name.
-   *
-   * @return $this
-   */
-  public static function create(string $name): static {
-    return ObjectManager::get(Structure::class, strtolower($name), new Structure($name));
-  }
+  protected ?FullyQualifiedName $parent = NULL;
 
   /**
    * Check the structure is final.
@@ -86,45 +56,47 @@ class Structure implements StructureInterface, FullyQualifiedNamedInterface {
   }
 
   /**
-   * Get the structure parent.
-   *
-   * @return \Xylemical\Code\Definition\Structure|null
-   *   The parent.
-   */
-  public function getParent(): ?Structure {
-    return $this->parent;
-  }
-
-  /**
-   * Check the structure has a parent.
+   * Check the structure is abstract.
    *
    * @return bool
    *   The result.
    */
-  public function hasParent(): bool {
-    return (bool) $this->parent;
+  public function isAbstract(): bool {
+    return $this->abstract;
   }
 
   /**
-   * Set the parent structure.
+   * Set the structure abstract flag.
    *
-   * @param \Xylemical\Code\Definition\Structure $parent
-   *   The parent structure.
+   * @param bool $flag
+   *   The flag.
    *
    * @return $this
    */
-  public function setParent(Structure $parent): static {
-    $this->parent = $parent;
+  public function setAbstract(bool $flag): static {
+    $this->abstract = $flag;
     return $this;
   }
 
   /**
-   * Remove the parent structure.
-   *
-   * @return $this
+   * {@inheritdoc}
    */
-  public function removeParent(): static {
-    $this->parent = NULL;
+  public function getParent(): ?FullyQualifiedName {
+    return $this->parent;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function hasParent(): bool {
+    return !is_null($this->parent);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setParent(string $parent): static {
+    $this->parent = $parent ? $this->manager->get($parent) : NULL;
     return $this;
   }
 

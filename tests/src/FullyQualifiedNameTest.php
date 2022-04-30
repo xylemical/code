@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Xylemical\Code;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * Tests \Xylemical\Code\FullyQualifiedName.
  */
 class FullyQualifiedNameTest extends TestCase {
+
+  use ProphecyTrait;
 
   /**
    * Provides test data for testFullyQualifiedName().
@@ -33,39 +36,42 @@ class FullyQualifiedNameTest extends TestCase {
    * @dataProvider providerTestFullyQualifiedName
    */
   public function testFullyQualifiedName(string $name, string $fullname, string $shortname, array $namespaces, ?string $separator = NULL): void {
+    $manager = new NameManager(new Language());
     if ($separator) {
-      FullyQualifiedName::setSeparator($separator);
-      $this->assertEquals($separator, FullyQualifiedName::getSeparator());
-    }
-    else {
-      $separator = '\\';
+      $manager->getLanguage()->setSeparator($separator);
     }
 
-    $obj = new FullyQualifiedName($name);
+    $separator = $separator ?: '\\';
+
+    $obj = new FullyQualifiedName($name, $manager);
     $this->assertEquals($fullname, (string) $obj);
     $this->assertEquals($shortname, $obj->getName());
     $this->assertEquals($shortname, $obj->getShorthand());
     $this->assertEquals($namespaces, $obj->getNamespace());
     $this->assertEquals(explode($separator, $fullname), $obj->getFullName());
     $this->assertFalse($obj->hasShorthand());
-    $this->assertTrue($obj->equals(new FullyQualifiedName($fullname)));
-    $this->assertFalse($obj->equals(new FullyQualifiedName('different')));
-    $this->assertFalse($obj->equals(new FullyQualifiedName("different{$separator}namespace")));
+    $this->assertTrue($obj->equals(new FullyQualifiedName($fullname, $manager)));
+    $this->assertFalse($obj->equals(new FullyQualifiedName('different', $manager)));
+    $this->assertFalse($obj->equals(new FullyQualifiedName("different{$separator}namespace", $manager)));
 
     $obj->setShorthand('alias');
     $this->assertEquals($shortname, $obj->getName());
     $this->assertEquals('alias', $obj->getShorthand());
     $this->assertTrue($obj->hasShorthand());
-    $this->assertTrue($obj->equals(new FullyQualifiedName($fullname)));
-    $this->assertFalse($obj->equals(new FullyQualifiedName('alias')));
+    $this->assertTrue($obj->equals(new FullyQualifiedName($fullname, $manager)));
+    $this->assertFalse($obj->equals(new FullyQualifiedName('alias', $manager)));
   }
 
   /**
    * Tests creation.
    */
   public function testCreation(): void {
-    $obj = FullyQualifiedName::create('unknown');
-    $this->assertEquals($obj, FullyQualifiedName::create('unknown'));
+    $manager = new NameManager(new Language());
+
+    $obj = FullyQualifiedName::create('unknown\\test', $manager);
+    $this->assertEquals(['unknown'], $obj->getNamespace());
+    $this->assertEquals('test', $obj->getName());
+    $this->assertEquals('unknown\\test', (string) $obj);
   }
 
 }
