@@ -21,14 +21,14 @@ class NameManagerTest extends TestCase {
 
     $name = $manager->get('test\\foo');
     $this->assertEquals('test\\foo', $name->getName());
-    $this->assertEquals([], $name->getNamespace());
+    $this->assertEquals('', $name->getNamespace());
 
     $second = $manager->get('test\\foo');
     $this->assertSame($name, $second);
 
     $name = $manager->get('test::foo');
     $this->assertEquals('foo', $name->getName());
-    $this->assertEquals(['test'], $name->getNamespace());
+    $this->assertEquals('test', $name->getNamespace());
 
     $second = $manager->getName($name);
     $this->assertSame($second, $name);

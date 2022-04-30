@@ -22,11 +22,11 @@ class FullyQualifiedNameTest extends TestCase {
    */
   public function providerTestFullyQualifiedName(): array {
     return [
-      ['unknown', 'unknown', 'unknown', []],
-      ['\\unknown', 'unknown', 'unknown', []],
-      ['unknown\\test', 'unknown\\test', 'test', ['unknown']],
-      ['\\unknown\\test', 'unknown\\test', 'test', ['unknown']],
-      ['$unknown$test', 'unknown$test', 'test', ['unknown'], '$'],
+      ['unknown', 'unknown', 'unknown', ''],
+      ['\\unknown', 'unknown', 'unknown', ''],
+      ['unknown\\test', 'unknown\\test', 'test', 'unknown'],
+      ['\\unknown\\test', 'unknown\\test', 'test', 'unknown'],
+      ['$unknown$test', 'unknown$test', 'test', 'unknown', '$'],
     ];
   }
 
@@ -35,7 +35,7 @@ class FullyQualifiedNameTest extends TestCase {
    *
    * @dataProvider providerTestFullyQualifiedName
    */
-  public function testFullyQualifiedName(string $name, string $fullname, string $shortname, array $namespaces, ?string $separator = NULL): void {
+  public function testFullyQualifiedName(string $name, string $fullname, string $shortname, string $namespace, ?string $separator = NULL): void {
     $manager = new NameManager(new Language());
     if ($separator) {
       $manager->getLanguage()->setSeparator($separator);
@@ -47,12 +47,13 @@ class FullyQualifiedNameTest extends TestCase {
     $this->assertEquals($fullname, (string) $obj);
     $this->assertEquals($shortname, $obj->getName());
     $this->assertEquals($shortname, $obj->getShorthand());
-    $this->assertEquals($namespaces, $obj->getNamespace());
-    $this->assertEquals(explode($separator, $fullname), $obj->getFullName());
+    $this->assertEquals($namespace, $obj->getNamespace());
+    $this->assertEquals($fullname, $obj->getFullName());
     $this->assertFalse($obj->hasShorthand());
     $this->assertTrue($obj->equals(new FullyQualifiedName($fullname, $manager)));
     $this->assertFalse($obj->equals(new FullyQualifiedName('different', $manager)));
     $this->assertFalse($obj->equals(new FullyQualifiedName("different{$separator}namespace", $manager)));
+    $this->assertEquals($separator, $obj->getSeparator());
 
     $obj->setShorthand('alias');
     $this->assertEquals($shortname, $obj->getName());
@@ -69,7 +70,7 @@ class FullyQualifiedNameTest extends TestCase {
     $manager = new NameManager(new Language());
 
     $obj = FullyQualifiedName::create('unknown\\test', $manager);
-    $this->assertEquals(['unknown'], $obj->getNamespace());
+    $this->assertEquals('unknown', $obj->getNamespace());
     $this->assertEquals('test', $obj->getName());
     $this->assertEquals('unknown\\test', (string) $obj);
   }

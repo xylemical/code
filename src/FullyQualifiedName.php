@@ -45,13 +45,26 @@ class FullyQualifiedName implements \Stringable {
   }
 
   /**
+   * Convert the parts into the properly namespaced items.
+   *
+   * @param string[] $parts
+   *   The parts.
+   *
+   * @return string
+   *   The result.
+   */
+  protected function doSeparator(array $parts): string {
+    return implode($this->getSeparator(), $parts);
+  }
+
+  /**
    * Get the namespace part of the name.
    *
-   * @return string[]
-   *   The namespace parts.
+   * @return string
+   *   The namespace.
    */
-  public function getNamespace(): array {
-    return array_slice($this->parts, 0, -1);
+  public function getNamespace(): string {
+    return $this->doSeparator(array_slice($this->parts, 0, -1));
   }
 
   /**
@@ -68,11 +81,11 @@ class FullyQualifiedName implements \Stringable {
   /**
    * Get the full name.
    *
-   * @return string[]
+   * @return string
    *   The name.
    */
-  public function getFullName(): array {
-    return $this->parts;
+  public function getFullName(): string {
+    return $this->doSeparator($this->parts);
   }
 
   /**
@@ -132,10 +145,20 @@ class FullyQualifiedName implements \Stringable {
   }
 
   /**
+   * Get the namespace separator.
+   *
+   * @return string
+   *   The separator.
+   */
+  public function getSeparator(): string {
+    return $this->manager->getLanguage()->getSeparator();
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function __toString() {
-    return implode($this->getLanguage()->getSeparator(), $this->getFullName());
+    return $this->getFullName();
   }
 
   /**

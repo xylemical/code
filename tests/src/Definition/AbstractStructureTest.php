@@ -31,7 +31,7 @@ class AbstractStructureTest extends TestCase {
     );
     $this->assertEquals('test\\foo', (string) $structure);
     $this->assertEquals('test\\foo', $structure->getName());
-    $this->assertEquals(['test'], $structure->getFullyQualifiedName()
+    $this->assertEquals('test', $structure->getFullyQualifiedName()
       ->getNamespace());
     $this->assertTrue($structure->getDocumentation()->isEmpty());
     $this->assertEquals([], $structure->getElements());
@@ -42,7 +42,7 @@ class AbstractStructureTest extends TestCase {
 
     $structure->setName('foo\\bar');
     $this->assertEquals('foo\\bar', (string) $structure);
-    $this->assertEquals(['foo'], $structure->getFullyQualifiedName()
+    $this->assertEquals('foo', $structure->getFullyQualifiedName()
       ->getNamespace());
 
     $fqname = new FullyQualifiedName('foo\\bar', $manager);
