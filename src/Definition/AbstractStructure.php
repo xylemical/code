@@ -128,7 +128,12 @@ abstract class AbstractStructure implements StructureInterface {
    * {@inheritdoc}
    */
   public function getElement(string $element): ?ElementInterface {
-    return $this->elements[strtolower($element)] ?? NULL;
+    foreach ($this->elements as $item) {
+      if ($item->getName() === $element) {
+        return $item;
+      }
+    }
+    return NULL;
   }
 
   /**
@@ -154,7 +159,7 @@ abstract class AbstractStructure implements StructureInterface {
    * {@inheritdoc}
    */
   public function addElement(ElementInterface $element): static {
-    $this->elements[strtolower($element->getName())] = $element;
+    $this->elements[] = $element;
     return $this;
   }
 
@@ -162,7 +167,9 @@ abstract class AbstractStructure implements StructureInterface {
    * {@inheritdoc}
    */
   public function removeElement(string $element): static {
-    unset($this->elements[strtolower($element)]);
+    $this->elements = array_filter($this->elements, function ($item) use ($element) {
+      return $item->getName() !== $element;
+    });
     return $this;
   }
 
@@ -170,7 +177,12 @@ abstract class AbstractStructure implements StructureInterface {
    * {@inheritdoc}
    */
   public function hasElement(string $element): bool {
-    return isset($this->elements[strtolower($element)]);
+    foreach ($this->elements as $item) {
+      if ($item->getName() === $element) {
+        return TRUE;
+      }
+    }
+    return FALSE;
   }
 
   /**
@@ -203,7 +215,7 @@ abstract class AbstractStructure implements StructureInterface {
    * {@inheritdoc}
    */
   public function addContract(string $contract): static {
-    $this->contracts[strtolower($contract)] = $this->manager->get($contract);
+    $this->contracts[] = $this->manager->get($contract);
     return $this;
   }
 
@@ -211,7 +223,9 @@ abstract class AbstractStructure implements StructureInterface {
    * {@inheritdoc}
    */
   public function removeContract(string $contract): static {
-    unset($this->contracts[strtolower($contract)]);
+    $this->contracts = array_filter($this->contracts, function ($item) use ($contract) {
+      return $item->getFullName() !== $contract;
+    });
     return $this;
   }
 
@@ -219,7 +233,12 @@ abstract class AbstractStructure implements StructureInterface {
    * {@inheritdoc}
    */
   public function hasContract(string $contract): bool {
-    return isset($this->contracts[strtolower($contract)]);
+    foreach ($this->contracts as $item) {
+      if ($item->getFullName() === $contract) {
+        return TRUE;
+      }
+    }
+    return FALSE;
   }
 
   /**
@@ -252,7 +271,7 @@ abstract class AbstractStructure implements StructureInterface {
    * {@inheritdoc}
    */
   public function addMixin(string $mixin): static {
-    $this->mixins[strtolower($mixin)] = $this->manager->get($mixin);
+    $this->mixins[] = $this->manager->get($mixin);
     return $this;
   }
 
@@ -260,7 +279,9 @@ abstract class AbstractStructure implements StructureInterface {
    * {@inheritdoc}
    */
   public function removeMixin(string $mixin): static {
-    unset($this->mixins[strtolower($mixin)]);
+    $this->mixins = array_filter($this->mixins, function ($item) use ($mixin) {
+      return $item->getFullName() !== $mixin;
+    });
     return $this;
   }
 
@@ -268,7 +289,12 @@ abstract class AbstractStructure implements StructureInterface {
    * {@inheritdoc}
    */
   public function hasMixin(string $mixin): bool {
-    return isset($this->mixins[strtolower($mixin)]);
+    foreach ($this->mixins as $item) {
+      if ($item->getFullName() === $mixin) {
+        return TRUE;
+      }
+    }
+    return FALSE;
   }
 
   /**
