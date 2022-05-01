@@ -14,16 +14,21 @@ class Indenter {
    *
    * @param string $text
    *   The text to indent.
-   * @param int $spaces
-   *   The number of spaces per level.
-   * @param int $levels
-   *   The number of levels.
+   * @param array $options
+   *   The options:
+   *      'spaces' - spaces per level - defaults to 2.
+   *      'levels' - number of levels - defaults to 1.
+   *      'ignoreFirst' - ignores indent on first line - defaults to FALSE.
    *
    * @return string
    *   The indented text.
    */
-  public static function indent(string $text, int $spaces = 2, int $levels = 1): string {
+  public static function indent(string $text, array $options): string {
     $result = '';
+    $spaces = intval($options['spaces'] ?? 2);
+    $levels = intval($options['levels'] ?? 1);
+    $ignoreFirst = boolval($options['ignoreFirst'] ?? FALSE);
+
     $indent = str_repeat(' ', $levels * $spaces);
 
     // Process each of the lines using all different line endings.
@@ -31,7 +36,7 @@ class Indenter {
     foreach ($lines as $index => $line) {
       if (!preg_match('/^(\r\n|\n|\r)$/', $line)) {
         if (trim($line)) {
-          $result .= $indent . $line;
+          $result .= (!$index && $ignoreFirst ? '' : $indent) . $line;
         }
       }
       else {
@@ -46,16 +51,21 @@ class Indenter {
    *
    * @param string $text
    *   The text to outdent.
-   * @param int $spaces
-   *   The number of spaces per level.
-   * @param int $levels
-   *   The number of levels.
+   * @param array $options
+   *   The options:
+   *      'spaces' - spaces per level - defaults to 2.
+   *      'levels' - number of levels - defaults to 1.
+   *      'ignoreFirst' - ignores indent on first line - defaults to FALSE.
    *
    * @return string
    *   The outdented text.
    */
-  public static function outdent(string $text, int $spaces = 2, int $levels = 1): string {
+  public static function outdent(string $text, array $options): string {
     $result = '';
+    $spaces = intval($options['spaces'] ?? 2);
+    $levels = intval($options['levels'] ?? 1);
+    $ignoreFirst = boolval($options['ignoreFirst'] ?? FALSE);
+
     $dedent = $levels * $spaces;
     $pattern = '/^[ ]{1,' . $dedent . '}/';
 
@@ -64,7 +74,12 @@ class Indenter {
     foreach ($lines as $index => $line) {
       if (!preg_match('/^(\r\n|\n|\r)$/', $line)) {
         if (trim($line)) {
-          $result .= preg_replace($pattern, '', $line);
+          if (!$index && $ignoreFirst) {
+            $result .= $line;
+          }
+          else {
+            $result .= preg_replace($pattern, '', $line);
+          }
         }
       }
       else {
@@ -72,25 +87,6 @@ class Indenter {
       }
     }
     return $result;
-  }
-
-  /**
-   * Removes indentation from first line only.
-   *
-   * @param string $text
-   *   The text to defix.
-   * @param int $spaces
-   *   The number of spaces per level.
-   * @param int $levels
-   *   The number of levels to defix.
-   *
-   * @return string
-   *   The defixed text.
-   */
-  public static function defix(string $text, int $spaces = 2, int $levels = 1): string {
-    $dedent = $levels * $spaces;
-    $pattern = '/^[ ]{1,' . $dedent . '}/';
-    return preg_replace($pattern, '', $text);
   }
 
 }
