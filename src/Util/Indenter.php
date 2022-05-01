@@ -23,7 +23,7 @@ class Indenter {
    * @return string
    *   The indented text.
    */
-  public static function indent(string $text, array $options): string {
+  public static function indent(string $text, array $options = []): string {
     $result = '';
     $spaces = intval($options['spaces'] ?? 2);
     $levels = intval($options['levels'] ?? 1);
@@ -60,7 +60,7 @@ class Indenter {
    * @return string
    *   The outdented text.
    */
-  public static function outdent(string $text, array $options): string {
+  public static function outdent(string $text, array $options = []): string {
     $result = '';
     $spaces = intval($options['spaces'] ?? 2);
     $levels = intval($options['levels'] ?? 1);
